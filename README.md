@@ -38,7 +38,8 @@ specific software and versions:
 * FreeBSD: 11
 * RHEL: 7
 * Ubuntu: 16.04
-* Windows: Server 2012 R2
+
+Sorry, there is no planned support at the moment for Windows.
 
 ## Role Variables
 
@@ -85,44 +86,37 @@ the variables are named and described below:
 ### `consul_bin_path`
 
 - Binary installation path
-- Default Linux value: `/usr/local/bin`
-- Default Windows value: `C:\ProgramData\consul\bin`
+- Default value: `/usr/local/bin`
 
 ### `consul_config_path`
 
 - Base configuration file path
-- Default Linux value: `/etc/consul`
-- Default Windows value: `C:\ProgramData\consul\config`
+- Default value: `/etc/consul`
 
 ### `consul_configd_path`
 
 - Additional configuration directory
-- Default Linux value: `/etc/consul.d`
-- Default Windows value: `C:\ProgramData\consul\config.d`
+- Default value: `/etc/consul.d`
 
 ### `consul_data_path`
 
 - Data path
-- Default Linux value: `/var/consul`
-- Default Windows value: `C:\ProgramData\consul\data`
+- Default value: `/var/consul`
 
 ### `consul_log_path`
 
 - Log path
-- Default Linux value: `/var/log/consul`
-- Default Windows value: `C:\ProgramData\consul\log`
+- Default value: `/var/log/consul`
 
 ### `consul_run_path`
 
 - Run path for PID file
-- Default Linux value: `/var/run/consul`
-- Default Windows value: `C:\ProgramData\consul`
+- Default value: `/var/run/consul`
 
 ### `consul_user`
 
 - OS user
-- Default Linux value: *consul*
-- Default Windows value: *LocalSystem*
+- Default value: *consul*
 
 ### `consul_group`
 
@@ -137,7 +131,7 @@ the variables are named and described below:
 
 ### `consul_servers`
 
-It's typically not necessary to manually alter this list.
+Although overwritable, it should not be necessary to manually alter this list.
 
 - List of server nodes
 - Default value: List of all nodes in `consul_group_name` with
@@ -176,8 +170,7 @@ in many Ansible versions, so this feature might not always work.
 
 - Log to syslog
   - Override with `CONSUL_SYSLOG_ENABLE` environment variable
-- Default Linux value: *true*
-- Default Windows value: *false*
+- Default value: *true*
 
 ### `consul_iface`
 
@@ -354,7 +347,6 @@ in many Ansible versions, so this feature might not always work.
 ### `consul_install_remotely`
 
 - Whether to download the files for installation directly on the remote hosts
-- This is the only option on Windows as WinRM is somewhat limited in this scope
 - Default value: *false*
 
 ### `consul_node_role`
@@ -482,26 +474,6 @@ packages with different package names.
 - List of OS packages to install
 - Default value: list
 
-### `consul_windows_pkg`
-
-- Consul package filename
-- Default value: `{{ consul_version }}_windows_amd64.zip`
-
-### `consul_windows_url`
-
-- Consul package download URL
-- Default value: `{{ consul_zip_url }}`
-
-### `consul_windows_sha256`
-
-- Consul download SHA256 summary
-- Default value: SHA256 SUM
-
-### `consul_windows_os_packages`
-
-- List of OS packages to install
-- Default value: list
-
 ## Dependencies
 
 Ansible requires GNU tar and this role performs some local use of the
@@ -510,11 +482,6 @@ in the PATH.
 
 If you're on system with a different (i.e. BSD) `tar`, like macOS and you
 see odd errors during unarchive tasks, you could be missing `gtar`.
-
-Installing Ansible on Windows requires the PowerShell Community Extensions.
-These already installed on Windows Server 2012 R2 and onward. If you're
-attempting this role on Windows Server 2008 or earlier, you'll want to install
-the extensions [here](https://pscx.codeplex.com/).
 
 ## Example Playbook
 
